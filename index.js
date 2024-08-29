@@ -3,6 +3,7 @@ async function fetchProducts() {
     const response = await fetch("https://dummyjson.com/products");
     const { products } = await response.json();
     console.log(products);
+    return products;
   } catch (error) {
     console.log("Error can't get the products: ", error);
   }
@@ -55,3 +56,43 @@ async function deleteProduct(id) {
   }
 }
 // deleteProduct(1);
+
+async function searchByTitle(productName) {
+  try {
+    const response = await fetch(
+      `https://dummyjson.com/products/search?q=${productName}`
+    );
+    const { products } = await response.json();
+    console.log(products);
+  } catch (error) {
+    console.log("Error product name search: ", error);
+  }
+}
+// searchByTitle("tv");
+
+async function filterByCategory(categoryName = "") {
+  try {
+    const products = await fetchProducts();
+    const filteredProducts = categoryName
+      ? products.filter((product) => product.category === categoryName)
+      : products;
+    console.log(filteredProducts);
+  } catch (error) {
+    console.log("Filter error: ", error);
+  }
+}
+// filterByCategory("groceries");
+
+// order is either "asc" or "desc"
+async function sortPrice(order = "asc") {
+  try {
+    const response = await fetch(
+      `https://dummyjson.com/products?sortBy=price&order=${order}`
+    );
+    const { products } = await response.json();
+    console.log(products);
+  } catch (error) {
+    console.log("Error on sorting price: ", error);
+  }
+}
+// sortPrice();
