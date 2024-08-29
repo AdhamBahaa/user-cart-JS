@@ -1,8 +1,8 @@
-async function fetchProducts() {
+export async function fetchProducts() {
   try {
     const response = await fetch("https://dummyjson.com/products");
     const { products } = await response.json();
-    console.log(products);
+    // console.log(products);
     return products;
   } catch (error) {
     console.log("Error can't get the products: ", error);
@@ -10,18 +10,19 @@ async function fetchProducts() {
 }
 // fetchProducts();
 
-async function fetchProductDetails(id) {
+export async function fetchProductDetails(id) {
   try {
     const response = await fetch(`https://dummyjson.com/products/${id}`);
     const { description } = await response.json();
     console.log(description);
+    return description;
   } catch (error) {
     console.log("Error getting the product: ", error);
   }
 }
 // fetchProductDetails(1);
 
-async function addProduct(product) {
+export async function addProduct(product) {
   try {
     const response = await fetch("https://dummyjson.com/products/add", {
       method: "POST",
@@ -32,6 +33,7 @@ async function addProduct(product) {
     });
     const data = await response.json();
     console.log("Product added:", data);
+    return data;
   } catch (error) {
     console.log("Error adding product: ", error);
   }
@@ -44,39 +46,42 @@ const newProduct = {
 };
 // addProduct(newProduct);
 
-async function deleteProduct(id) {
+export async function deleteProduct(id) {
   try {
     const response = await fetch(`https://dummyjson.com/products/${id}`, {
       method: "DELETE",
     });
     const data = await response.json();
     console.log("Product deleted:", data);
+    return data;
   } catch (error) {
     console.log("Error deleting product: ", error);
   }
 }
 // deleteProduct(1);
 
-async function searchByTitle(productName) {
+export async function searchByTitle(productName) {
   try {
     const response = await fetch(
       `https://dummyjson.com/products/search?q=${productName}`
     );
     const { products } = await response.json();
     console.log(products);
+    return products;
   } catch (error) {
     console.log("Error product name search: ", error);
   }
 }
 // searchByTitle("tv");
 
-async function filterByCategory(categoryName = "") {
+export async function filterByCategory(categoryName = "") {
   try {
     const products = await fetchProducts();
     const filteredProducts = categoryName
       ? products.filter((product) => product.category === categoryName)
       : products;
     console.log(filteredProducts);
+    return filteredProducts;
   } catch (error) {
     console.log("Filter error: ", error);
   }
@@ -84,13 +89,14 @@ async function filterByCategory(categoryName = "") {
 // filterByCategory("groceries");
 
 // order is either "asc" or "desc"
-async function sortPrice(order = "asc") {
+export async function sortPrice(order = "asc") {
   try {
     const response = await fetch(
       `https://dummyjson.com/products?sortBy=price&order=${order}`
     );
     const { products } = await response.json();
     console.log(products);
+    return products;
   } catch (error) {
     console.log("Error on sorting price: ", error);
   }
