@@ -77,6 +77,9 @@ export async function searchByTitle(productName) {
 export async function filterByCategory(products, categoryName = "") {
   try {
     // const products = await fetchProducts();
+    if (categoryName === "All") {
+      return products; // Return all products if 'All' is selected
+    }
     const filteredProducts = categoryName
       ? products.filter((product) => product.category === categoryName)
       : products;

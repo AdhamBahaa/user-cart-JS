@@ -53,16 +53,37 @@
           </h2>
           <div class="px-4">
             <div class="input-group mb-3">
+              <label for="search-input" class="font-bold pt-1 pr-2"
+                >Search:</label
+              >
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search by title"
+                class="rounded p-1 mr-6"
+              />
+              <label for="categorySelect" class="font-bold pt-1 pr-2"
+                >Filter Category:
+              </label>
               <select
                 id="categorySelect"
-                class="custom-select rounded p-1"
+                class="custom-select rounded p-1 mr-6"
                 id="inputGroupSelect02"
               >
-                <option selected>Choose a Category...</option>
+                <option value="All" selected>All Categories</option>
                 <option value="beauty">Beauty</option>
                 <option value="fragrances">Fragrance</option>
                 <option value="furniture">Furniture</option>
                 <option value="groceries">Grocery</option>
+              </select>
+
+              <label for="sort-select" class="font-bold pt-1 pr-2"
+                >Sort Price:
+              </label>
+              <select id="sort-select" class="custom-select rounded p-1 mr-3">
+                <option value="default">Default</option>
+                <option value="asc">Low to High</option>
+                <option value="desc">High to Low</option>
               </select>
             </div>
           </div>

@@ -36,21 +36,39 @@ function renderProducts(products) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const products = await fetchProducts();
+  let products = await fetchProducts();
   if (products) {
     renderProducts(products);
   }
 
   const categorySelect = document.getElementById("categorySelect");
-  if (!categorySelect) {
-    console.error("Element with ID 'custom-select' not found.");
-    return;
-  }
   categorySelect.addEventListener("change", async (event) => {
     const filteredProducts = await filterByCategory(
       products,
       event.target.value
     );
     renderProducts(filteredProducts);
+  });
+
+  const sortSelect = document.getElementById("sort-select");
+  sortSelect.addEventListener("change", async (event) => {
+    if (event.target.value === "default") {
+      // Refetch the products or reset to original order if stored
+      products = await fetchProducts();
+    } else {
+      products = await sortPrice(event.target.value);
+    }
+    renderProducts(products);
+  });
+
+  const searchInput = document.getElementById("search-input");
+  searchInput.addEventListener("input", async (event) => {
+    const searchQuery = event.target.value;
+    if (searchQuery.trim() === "") {
+      products = await fetchProducts();
+    } else {
+      products = await searchByTitle(searchQuery);
+    }
+    renderProducts(products);
   });
 });
