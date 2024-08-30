@@ -33,6 +33,9 @@ export async function addProduct(product) {
     });
     const data = await response.json();
     console.log("Product added:", data);
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push(data);
+    localStorage.setItem("cart", JSON.stringify(cart));
     return data;
   } catch (error) {
     console.log("Error adding product: ", error);
@@ -53,13 +56,17 @@ export async function deleteProduct(id) {
     });
     const data = await response.json();
     console.log("Product deleted:", data);
+
     return data;
   } catch (error) {
     console.log("Error deleting product: ", error);
   }
 }
 // deleteProduct(1);
-
+// let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// cart = cart.filter((product) => product.id !== id);
+// localStorage.setItem("cart", JSON.stringify(cart));
+// window.location.reload();
 export async function searchByTitle(productName) {
   try {
     const response = await fetch(
