@@ -13,14 +13,14 @@ export async function fetchProducts() {
 export async function fetchProductDetails(id) {
   try {
     const response = await fetch(`https://dummyjson.com/products/${id}`);
-    const { description } = await response.json();
-    console.log(description);
-    return description;
+    const product = await response.json();
+    console.log(product);
+    return product;
   } catch (error) {
     console.log("Error getting the product: ", error);
   }
 }
-// fetchProductDetails(1);
+// fetchProductDetails(2);
 
 export async function addProduct(product) {
   try {

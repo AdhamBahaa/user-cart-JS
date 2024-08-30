@@ -27,7 +27,7 @@ function renderProducts(products) {
                 <p class="card-text pb-3">
                   $${product.price}
                 </p>
-                <a href="#" class="btn btn-primary">See more</a>
+                <a href="product-details.html?id=${product.id}" class="btn btn-primary">See more</a>
               </div>
             </div>
         `;
