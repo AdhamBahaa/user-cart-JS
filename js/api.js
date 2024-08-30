@@ -2,7 +2,7 @@ export async function fetchProducts() {
   try {
     const response = await fetch("https://dummyjson.com/products");
     const { products } = await response.json();
-    // console.log(products);
+    console.log(products);
     return products;
   } catch (error) {
     console.log("Error can't get the products: ", error);
@@ -74,9 +74,9 @@ export async function searchByTitle(productName) {
 }
 // searchByTitle("tv");
 
-export async function filterByCategory(categoryName = "") {
+export async function filterByCategory(products, categoryName = "") {
   try {
-    const products = await fetchProducts();
+    // const products = await fetchProducts();
     const filteredProducts = categoryName
       ? products.filter((product) => product.category === categoryName)
       : products;
